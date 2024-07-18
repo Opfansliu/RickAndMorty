@@ -1,4 +1,4 @@
-# a swift project about RickAndMorty
+# a swift project about Rick & Morty
 
 Full featured iOS app showcasing the Rick and Morty API
 
