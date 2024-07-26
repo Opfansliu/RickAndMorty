@@ -16,8 +16,6 @@ final class CharactersViewController: UIViewController {
         title = "Character"
         view.backgroundColor = .systemBackground
         setUpView()
-        
-       
     }
     
     
