@@ -8,11 +8,13 @@
 import UIKit
 
 final class RMEpisodeDetailViewController: UIViewController {
-    private let url: URL?
-    
+    private let viewModel: RMEpisodeDetailViewModel
+    private let detailView: RMEpisodeDetailView
+     
     // MARK: - init
     init(url: URL?) {
-        self.url = url
+        self.viewModel = .init(endpointUrl: url)
+        self.detailView = RMEpisodeDetailView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,10 +26,49 @@ final class RMEpisodeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Episode"
-        view.backgroundColor = .systemCyan
-
-        // Do any additional setup after loading the view.
+        view.addSubview(detailView)
+        addConstrains()
+        view.backgroundColor = .systemBackground
+        detailView.delegate = self
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
+        
+        viewModel.delegate = self
+        viewModel.fetchEpisodeData()
+        
+    }
+    private func addConstrains() {
+        NSLayoutConstraint.activate([
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            detailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
+    @objc 
+    private func didTapShare() {
+        
+    }
+    
+}
 
+extension RMEpisodeDetailViewController: RMEpisodeDetailViewModelDelete {
+    func didFetchEpisodeDetails() {
+        detailView.config(with: viewModel)
+    }
+}
+
+extension RMEpisodeDetailViewController: RMEpisodeDetailViewDelete {
+    func rmEpisodeDetailView(_ detailView: RMEpisodeDetailView, didSelect character: RMCharacter) {
+        
+        let characterDetailViewModel = RMCharacterDetailViewViewModel(character: character)
+        let characterDetailViewController = RMCharacterDetailViewController(viewModel: characterDetailViewModel)
+        characterDetailViewController.title = character.name
+        characterDetailViewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(characterDetailViewController, animated: true)
+        
+    }
+    
+    
 }

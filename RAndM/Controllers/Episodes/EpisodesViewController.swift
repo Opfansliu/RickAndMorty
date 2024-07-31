@@ -7,23 +7,45 @@
 
 import UIKit
 
-final class EpisodesViewController: UIViewController {
+final class EpisodesViewController: UIViewController, RMEpisodeListViewDelegate {
+    
+    private let episodeListView = RMEpisodeListView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = "Episodes"
+        view.backgroundColor = .systemBackground
+        setUpView()
+        addSearchButton()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func addSearchButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
     }
-    */
+    
+    @objc
+    private func didTapSearch() {
+        
+    }
+    
+    
+    private func setUpView(){
+        view.addSubview(episodeListView)
+        episodeListView.delegate = self
+        NSLayoutConstraint.activate([
+            episodeListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            episodeListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            episodeListView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            episodeListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        
+        ])
+    }
 
+}
+
+extension EpisodesViewController {
+    func rmEpisodeListView(_ listView: RMEpisodeListView, didSelectEpisode episode: RMEpisode) {
+        let EpisodeDetailViewController = RMEpisodeDetailViewController(url: URL(string: episode.url))
+        navigationController?.pushViewController(EpisodeDetailViewController, animated: true)
+    }
 }
