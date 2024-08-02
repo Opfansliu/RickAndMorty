@@ -19,6 +19,9 @@ final class LocationsViewController: UIViewController {
         view.addSubview(primaryView)
         addConstrains()
         title = "Location"
+        viewModel.delegate = self
+        viewModel.fetchLocations()
+        primaryView.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -52,4 +55,15 @@ final class LocationsViewController: UIViewController {
     }
     */
 
+}
+extension LocationsViewController: RMLocationViewModelDelete {
+    func didFetchInitialLocations() {
+        primaryView.config(with: viewModel)
+    }
+}
+
+extension LocationsViewController: RMLocationViewDelete {
+    func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
+        
+    }
 }
