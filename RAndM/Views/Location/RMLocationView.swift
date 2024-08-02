@@ -107,7 +107,9 @@ extension RMLocationView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let locationModel = viewModel?.location(at: indexPath.row) else { return }
+        guard let locationModel = viewModel?.location(at: indexPath.row) else {
+            return
+        }
         delegate?.rmLocationView(self, didSelect:locationModel)
     }
 }

@@ -32,7 +32,7 @@ final class RMServer {
             do {
                 
                 let result = try JSONDecoder().decode(type.self, from: cacheData)
-                print("using cached api response")
+//                print("using cached api response")
                 completion(.success(result))
             } catch {
                 completion(.failure(error))

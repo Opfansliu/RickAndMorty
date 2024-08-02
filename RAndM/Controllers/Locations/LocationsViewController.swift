@@ -64,6 +64,7 @@ extension LocationsViewController: RMLocationViewModelDelete {
 
 extension LocationsViewController: RMLocationViewDelete {
     func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
-        
+        let detailVC = RMLocationDetailViewController(location: location)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
