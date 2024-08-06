@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EpisodesViewController: UIViewController, RMEpisodeListViewDelegate {
+final class RMEpisodesViewController: UIViewController, RMEpisodeListViewDelegate {
     
     private let episodeListView = RMEpisodeListView()
 
@@ -25,6 +25,9 @@ final class EpisodesViewController: UIViewController, RMEpisodeListViewDelegate 
     
     @objc
     private func didTapSearch() {
+        let vc = RMSearchViewController(config: .init(type: .episode))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -43,7 +46,7 @@ final class EpisodesViewController: UIViewController, RMEpisodeListViewDelegate 
 
 }
 
-extension EpisodesViewController {
+extension RMEpisodesViewController {
     func rmEpisodeListView(_ listView: RMEpisodeListView, didSelectEpisode episode: RMEpisode) {
         let EpisodeDetailViewController = RMEpisodeDetailViewController(url: URL(string: episode.url))
         navigationController?.pushViewController(EpisodeDetailViewController, animated: true)

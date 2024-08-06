@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LocationsViewController: UIViewController {
+final class RMLocationsViewController: UIViewController {
     
     private let primaryView = RMLocationView()
     
@@ -31,7 +31,9 @@ final class LocationsViewController: UIViewController {
     
     @objc
     private func didTapSearch() {
-        
+        let vc = RMSearchViewController(config: .init(type: .location))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func addConstrains() {
@@ -56,13 +58,13 @@ final class LocationsViewController: UIViewController {
     */
 
 }
-extension LocationsViewController: RMLocationViewModelDelete {
+extension RMLocationsViewController: RMLocationViewModelDelete {
     func didFetchInitialLocations() {
         primaryView.config(with: viewModel)
     }
 }
 
-extension LocationsViewController: RMLocationViewDelete {
+extension RMLocationsViewController: RMLocationViewDelete {
     func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
         let detailVC = RMLocationDetailViewController(location: location)
         navigationController?.pushViewController(detailVC, animated: true)

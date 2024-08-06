@@ -10,7 +10,7 @@ import SwiftUI
 import SafariServices
 import StoreKit
 
-final class SettingsViewController: UIViewController {
+final class RMSettingsViewController: UIViewController {
     
     private var settingsSwiftUIController: UIHostingController<RMSettingView>?
 

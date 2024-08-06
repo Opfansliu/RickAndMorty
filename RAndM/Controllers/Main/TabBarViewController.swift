@@ -19,9 +19,9 @@ class TabBarViewController: UITabBarController {
     
     func configSubViewControllers() {
         let charactersVC = UINavigationController(rootViewController: CharactersViewController())
-        let locationsVC =  UINavigationController(rootViewController: LocationsViewController())
-        let episodesVC =  UINavigationController(rootViewController: EpisodesViewController())
-        let settingsVC =  UINavigationController(rootViewController: SettingsViewController())
+        let locationsVC =  UINavigationController(rootViewController: RMLocationsViewController())
+        let episodesVC =  UINavigationController(rootViewController: RMEpisodesViewController())
+        let settingsVC =  UINavigationController(rootViewController: RMSettingsViewController())
         
         charactersVC.title = "characters"
         charactersVC.tabBarItem.image = UIImage(systemName: "person")
